@@ -1,12 +1,13 @@
-//<>// //<>// //<>//
+//<>// //<>// //<>// //<>//
 int niveles;
 boolean nextLevel;
+boolean Win;
 Player jugador;
 Obstacle obstaculo, obstaculo1, obstaculo2, obstaculo3, obstaculo4, obstaculo5, obstaculo6, obstaculo7, obstaculo8, obstaculo9, obstaculo10;
-Particula[] rozando;
-Meta meta1, meta2, meta0;
-NormalEnemy normalEnemie,normalEnemie2, normalEnemie3;
-Enemy enemigo1;
+ParticulaWin[] win;
+Meta meta1, meta2, meta0, meta3;
+NormalEnemy normalEnemie, normalEnemie2, normalEnemie3;
+Enemy[] enemigos;
 //Funciones con las matrices de transformacion homogenea
 void trasladar(float incrementoX, float incrementoY) { 
   applyMatrix(1.0, 0.0, incrementoX, 
@@ -27,12 +28,21 @@ public void settings() {
 void setup() {
   frameRate(90);
   rectMode(RADIUS);
-  jugador = new Player(new PVector(25, 25), new PVector(0, 0));  
+  jugador = new Player(new PVector(25, 25), new PVector(0, 0)); 
+  win = new ParticulaWin[100];
+  for (int i = 0; i<100; i++) {
+    win[i] = new ParticulaWin(new PVector(width/2, height/2), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
+  }
+
   // Enemy
-  normalEnemie = new NormalEnemy(new PVector(100, 300), new PVector(0,2));
-  enemigo1 = new Enemy(new PVector(random(width),random(height)));
-  normalEnemie2 = new NormalEnemy(new PVector(450, 200), new PVector(2,0));
-  normalEnemie3 = new NormalEnemy(new PVector(1100, 525), new PVector(2,0));
+  normalEnemie = new NormalEnemy(new PVector(100, 300), new PVector(0, 2));
+  enemigos = new Enemy[50];
+  for (int j = 0; j<50; j++) {
+    enemigos[j] = new Enemy(new PVector(random(200, width), random(height)));
+  }
+
+  normalEnemie2 = new NormalEnemy(new PVector(450, 200), new PVector(2, 0));
+  normalEnemie3 = new NormalEnemy(new PVector(1100, 525), new PVector(2, 0));
   // Nivel 0
   obstaculo9 = new Obstacle(new PVector(600, 150), 10000, 50, 0);
   meta0 = new Meta(new PVector(1100, 50), 20, 20, 0);
@@ -51,17 +61,17 @@ void setup() {
   obstaculo8 = new Obstacle(new PVector(300, 200), 100, 600, 0);
   meta2 = new Meta(new PVector(1075, 200), 20, 20, 0); 
   // segon nivell
-  rozando = new Particula[10];
+  meta3 = new Meta(new PVector(1075, 200), 20, 20, 0);
 
-  for (int i = 0; i<10; i++) {
-    rozando[i] = new Particula(0.9, new PVector(0, 0), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
-  }
-  niveles = 0;
+
+
+  niveles = 3;
   nextLevel = false;
+  Win = false;
 }
 void draw() {
   nextLevel = false;
-  background(51,51,255);
+  background(51, 51, 255);
   jugador.Mover();
   if (meta1.cogido) meta1.Orbitar(jugador);
   if (meta2.cogido) meta2.Orbitar(jugador);
@@ -72,16 +82,16 @@ void draw() {
     nivellZero();
     break;
   case 1:
-  textSize(40);
+    textSize(40);
     text("¿Un laberinto?", 325, 100);
     primerNivell();
     break;
   case 2:
-  textSize(50);
+    textSize(50);
     text("¡Enemigos!", 450, 100); 
     segonNivell();
-    
-    
+
+
     break;
   case 3:
     textSize(30);
@@ -90,10 +100,13 @@ void draw() {
     text("(Pulsa espacio para repeler enemigos)", 350, 550);
     tercerNivell();
     break;
+  case 4:
+    pantallaVictoria();
+    break;
   };
   if (nextLevel) {
     nextLevel = false;
     niveles++;
-    if (niveles > 3) niveles = 0;
+    if (niveles > 3) Win = true;
   }
 }

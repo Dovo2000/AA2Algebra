@@ -1,6 +1,6 @@
-class Particula {
+class ParticulaWin {
   // Atributos
-  float masa;
+
   PVector pos;
   PVector vel;
   float acelX;
@@ -11,10 +11,11 @@ class Particula {
   int tam;
   float posXo;
   float posYo;
+  int alpha = 255;
+  float masa = 1;
 
   // Constructor
-  Particula(float _m, PVector _pos, PVector _vel, int _t) {
-    masa = _m;
+  ParticulaWin(PVector _pos, PVector _vel, int _t) { 
     pos = _pos;
     vel = _vel;
     tam = _t;
@@ -27,28 +28,22 @@ class Particula {
   // Metodos
   // Mover Particula
   void Mover() {
-    ////Aqui tenemos el SOLVER
-    //// 1- Calcular la aceleracion
-    //acelX = fuerzaX/masa;
-    //acelY = fuerzaY/masa;
-    //// 2- Calcular la nueva velocidad
-    //this.vel.x = vel.x + acelX*tiempo;
-    //this.vel.y = vel.y + acelY*tiempo;
-    //// 3- Calcular la nueva posicion
-    //this.pos.x = pos.x + vel.x*tiempo;
-    //this.pos.y = pos.y + vel.y*tiempo;
-    //vel.limit(50);
-    trasladar(30, 0);
+    //Aqui tenemos el SOLVER
+    // 1- Calcular la aceleracion
+    acelX = fuerzaX/masa;
+    acelY = fuerzaY/masa;
+    // 2- Calcular la nueva velocidad
+    this.vel.x = vel.x + acelX*tiempo;
+    this.vel.y = vel.y + acelY*tiempo;
+    // 3- Calcular la nueva posicion
+    this.pos.x = pos.x + vel.x*tiempo;
+    this.pos.y = pos.y + vel.y*tiempo;
+    vel.limit(50);
   }
   void Update() {
-
-    fill(233, 0, 0, 80);
-    ellipse(pos.x, pos.y, tam, tam);
-    fill(255);
-  }
-  void Eliminar() {
-    pos.x = 2000;
-    pos.y = 0;
-    tam = 0;
+    trasladar(pos.x, pos.y);
+    fill(233, 0, 0);
+    ellipse(0, 0, tam, tam);
+    resetMatrix();
   }
 }
