@@ -3,7 +3,7 @@ class Player {
   PVector pos;
   PVector vel;
   boolean rozando = false;
-  int tam = 50;
+  int tam = 25;
 
   Player(PVector _pos, PVector _vel) {
     pos = _pos;
@@ -30,6 +30,7 @@ class Player {
     ChocarParedes();
   }
   void DibujarPlayer() {
+    fill(0,150,150, 80);
     trasladar(pos.x,pos.y);
     ellipse(0, 0, tam, tam);
     resetMatrix();

@@ -24,7 +24,7 @@ public void settings() {
 void setup() {
   frameRate(90);
   rectMode(RADIUS);
-  jugador = new Player(new PVector(50, 50), new PVector(0, 0));  
+  jugador = new Player(new PVector(25, 25), new PVector(0, 0));  
   obstaculo = new Obstacle(new PVector(width/2, height/2), 100, 200, 0);
   rozando = new Particula[10];
 
