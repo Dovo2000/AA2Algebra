@@ -9,4 +9,10 @@ void segonNivell() {
   obstaculo8.ChocarConPlayer(jugador);
   meta2.ChocarConPlayer(jugador);
   jugador.DibujarPlayer();
+  normalEnemie.DibujarNormalEnemy();
+  normalEnemie2.DibujarNormalEnemy();
+  normalEnemie.move1();
+  normalEnemie.move2();
+  normalEnemie.ChocarConPlayer(jugador);
+  
 }
