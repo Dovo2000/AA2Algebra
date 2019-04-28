@@ -14,8 +14,8 @@ class Obstacle {
     if (angulo>=TWO_PI) angulo = 0;
     trasladar(pos.x, pos.y);
     
-    fill(0, 255, 0, 80);
-    rect(0, 0, ancho, alto);
+    //fill(0, 255, 0, 80);
+    //rect(0, 0, ancho, alto);
     
     rotar(angulo);
 
@@ -32,7 +32,7 @@ class Obstacle {
     trasladar(width/2, height/2);
     PVector posJug = PVector.sub(jug.pos, pos);
 
-    rotar(-angulo);
+    posJug.rotate(-angulo);
     posJug.add(pos);
 
     //fill(0, 255, 0, 80);

@@ -13,16 +13,16 @@ class Player {
   void Mover() {
     if (keyPressed) {
       if (key == 'w' || key == 'W') {
-        vel.y -= 0.5;
+        vel.y -= 0.2;
       }
       if (key == 's' || key == 'S') {
-        vel.y += 0.5;
+        vel.y += 0.2;
       }
       if (key == 'd' || key == 'D') {
-        vel.x += 0.5;
+        vel.x += 0.2;
       }
       if (key == 'a' || key == 'A') {
-        vel.x -= 0.5;
+        vel.x -= 0.2;
       }
     }
     vel.limit(5);

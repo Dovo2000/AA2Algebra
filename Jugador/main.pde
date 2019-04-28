@@ -24,8 +24,8 @@ public void settings() {
 void setup() {
   frameRate(90);
   rectMode(RADIUS);
-  jugador = new Player(new PVector(0, 0), new PVector(0, 0));  
-  obstaculo = new Obstacle(new PVector(width/2, height/2), 200, 200, 0);
+  jugador = new Player(new PVector(50, 50), new PVector(0, 0));  
+  obstaculo = new Obstacle(new PVector(width/2, height/2), 100, 200, 0);
   rozando = new Particula[10];
 
   for (int i = 0; i<10; i++) {
@@ -33,7 +33,7 @@ void setup() {
   }
 }
 void draw() {
-  background(0);
+  background(150);
   jugador.Mover();
   obstaculo.DibujarObstacle();
   obstaculo.ChocarConPlayer(jugador);
