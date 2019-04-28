@@ -52,9 +52,10 @@ void setup() {
 }
 void draw() {
   nextLevel = false;
-  background(150);
+  background(51,51,255);
   jugador.Mover();
-
+  if (meta1.cogido) meta1.Orbitar(jugador);
+  if (meta2.cogido) meta2.Orbitar(jugador);
   switch(niveles) {
   case 1:
     primerNivell();
