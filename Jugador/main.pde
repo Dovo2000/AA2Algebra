@@ -2,6 +2,7 @@
 int niveles;
 boolean nextLevel;
 boolean Win;
+float time;
 Player jugador;
 Obstacle obstaculo, obstaculo1, obstaculo2, obstaculo3, obstaculo4, obstaculo5, obstaculo6, obstaculo7, obstaculo8, obstaculo9, obstaculo10;
 ParticulaWin[] win;
@@ -9,8 +10,6 @@ Meta meta1, meta2, meta0, meta3;
 NormalEnemy normalEnemie, normalEnemie2, normalEnemie3;
 Enemy[] enemigos;
 ParticulaMuerte[] muerte;
-Meta meta1, meta2, meta0;
-NormalEnemy normalEnemie,normalEnemie2, normalEnemie3;
 //Funciones con las matrices de transformacion homogenea
 void trasladar(float incrementoX, float incrementoY) { 
   applyMatrix(1.0, 0.0, incrementoX, 
@@ -70,7 +69,7 @@ void setup() {
 
   niveles = 3;
   muerte= new ParticulaMuerte[50];
-  
+
   for (int i = 0; i<50; i++) {
     muerte[i] = new ParticulaMuerte(0.9, new PVector(jugador.pos.x, jugador.pos.y), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
   }
@@ -79,7 +78,7 @@ void setup() {
   Win = false;
 }
 void draw() {
-  
+  time = 60000-millis();
   nextLevel = false;
   background(51, 51, 255);
   jugador.Mover();
@@ -87,42 +86,45 @@ void draw() {
   if (meta2.cogido) meta2.Orbitar(jugador);
   switch(niveles) {
   case 0:
-  fill(255);
+    fill(255);
     textSize(50);
     text("Parecen unas ruinas abandonadas...", 200, 300); 
-    textSize(20);
-    text((60000-millis())/1000, 900, 20); 
+    textSize(30);
+    text((60000-millis())/1000, 900, 30); 
     nivellZero();
     break;
   case 1:
-  fill(255);
+    fill(255);
     textSize(40);
     text("¿Un laberinto?", 325, 100);
-     textSize(20);
+    textSize(30);
     text((60000-millis())/1000, 900, 20);
     primerNivell();
     break;
   case 2:
-  fill(255);
+    fill(255);
     textSize(50);
     text("¡Enemigos!", 450, 100); 
     segonNivell();
-     textSize(20);
+    textSize(30);
     text((60000-millis())/1000, 900, 20); 
-    
+
     break;
   case 3:
-  fill(255);
+    fill(255);
     textSize(30);
     text("¿Este poder...? ", 400, 500);
     textSize(20);
-    text("(Pulsa espacio para repeler enemigos)", 350, 550);
-     textSize(20);
+    text("(Pulsa M para congelar a los enemigos)", 350, 550);
+    textSize(30);
     text((60000-millis())/1000, 900, 20); 
     tercerNivell();
     break;
   case 4:
     pantallaVictoria();
+    break;
+  case -1:
+    //pantallaMuerte();
     break;
   };
   if (nextLevel) {
@@ -130,43 +132,12 @@ void draw() {
     niveles++;
     if (niveles > 3) Win = true;
   }
-  if((3000-millis() <= 0) ){
+  if ((time <= 0) ) {
     for (int j = 0; j<50; j++) {
-    muerte[j].Update();
-    muerte[j].Mover();
-    muerte[j].ChocarParedes();
+      muerte[j].Update();
+      muerte[j].Mover();
+      muerte[j].ChocarParedes();
+      
+    }
   }
-
 }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//trasladar(width/2, height/2);
-//obstaculo.DibujarObstacle();
-//obstaculo.ChocarConPlayer(jugador);
-//jugador.Mover();
-//jugador.DibujarPlayer();
-//resetMatrix(); 
-
-////   for (int j = 0; j<10; j++) {
-////     trasladar(jugador.pos.x, jugador.pos.y);
-////     rozando[j].Mover();
-////     rozando[j].Update();
-////     resetMatrix();
-////   }
-//// }
