@@ -12,6 +12,7 @@ void primerNivell() {
   obstaculo2.ChocarConPlayer(jugador);
   obstaculo3.ChocarConPlayer(jugador);
   obstaculo4.ChocarConPlayer(jugador);
+  obstaculo5.ChocarConPlayer(jugador);
   meta1.ChocarConPlayer(jugador);
   jugador.DibujarPlayer();
 }

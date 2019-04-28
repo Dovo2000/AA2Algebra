@@ -11,8 +11,10 @@ void segonNivell() {
   jugador.DibujarPlayer();
   normalEnemie.DibujarNormalEnemy();
   normalEnemie2.DibujarNormalEnemy();
+  normalEnemie3.DibujarNormalEnemy();
   normalEnemie.move1();
-  normalEnemie.move2();
+  normalEnemie2.move2();
+  normalEnemie3.move3();
   normalEnemie.ChocarConPlayer(jugador);
-  
+  normalEnemie2.ChocarConPlayer(jugador);
 }

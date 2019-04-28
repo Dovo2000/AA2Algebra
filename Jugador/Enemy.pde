@@ -65,8 +65,8 @@ boolean arriba = false;
   }
    
    void move2(){
-    if(pos.x > 500 || pos.x < 100){
-     vel.y *= -1;
+    if(pos.x < 450 || pos.x > 750){
+     vel.x *= -1;
    }
     
     
@@ -78,8 +78,8 @@ boolean arriba = false;
     ChocarParedes(); 
   }
    void move3(){
-    if(pos.y > 500 || pos.y < 100){
-     vel.y *= -1;
+    if(pos.x < 700 || pos.x > 1101){
+     vel.x *= -1;
    }
     
     vel.limit(2.5);
@@ -87,7 +87,7 @@ boolean arriba = false;
     ChocarParedes(); 
    }
   void DibujarNormalEnemy() {
-    fill(250, 150, 150, 80);
+    fill(200, 0, 0, 200);
     trasladar(pos.x, pos.y);
     ellipse(0, 0, tam, tam);
     resetMatrix();
