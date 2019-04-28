@@ -4,9 +4,9 @@ boolean nextLevel;
 Player jugador;
 Obstacle obstaculo, obstaculo1, obstaculo2, obstaculo3, obstaculo4, obstaculo5, obstaculo6, obstaculo7, obstaculo8, obstaculo9, obstaculo10;
 Particula[] rozando;
+Meta meta1, meta2, meta0;
+NormalEnemy normalEnemie,normalEnemie2, normalEnemie3;
 Enemy enemigo1;
-Meta meta1, meta2;
-NormalEnemy normalEnemie,normalEnemie2;
 //Funciones con las matrices de transformacion homogenea
 void trasladar(float incrementoX, float incrementoY) { 
   applyMatrix(1.0, 0.0, incrementoX, 
@@ -30,8 +30,12 @@ void setup() {
   jugador = new Player(new PVector(25, 25), new PVector(0, 0));  
   // Enemy
   normalEnemie = new NormalEnemy(new PVector(100, 300), new PVector(0,2));
-  normalEnemie2 = new NormalEnemy(new PVector(500, 100), new PVector(0,2));
   enemigo1 = new Enemy(new PVector(random(width),random(height)));
+  normalEnemie2 = new NormalEnemy(new PVector(450, 200), new PVector(2,0));
+  normalEnemie3 = new NormalEnemy(new PVector(1100, 525), new PVector(2,0));
+  // Nivel 0
+  obstaculo9 = new Obstacle(new PVector(600, 150), 10000, 50, 0);
+  meta0 = new Meta(new PVector(1100, 50), 20, 20, 0);
   // primer nivell
   obstaculo = new Obstacle(new PVector(width/2 - 100, height/2 +300), 100, 900, 0);
   obstaculo1 = new Obstacle(new PVector(10, 600), 100, 900, 0);
@@ -52,7 +56,7 @@ void setup() {
   for (int i = 0; i<10; i++) {
     rozando[i] = new Particula(0.9, new PVector(0, 0), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
   }
-  niveles = 3;
+  niveles = 0;
   nextLevel = false;
 }
 void draw() {
@@ -62,21 +66,34 @@ void draw() {
   if (meta1.cogido) meta1.Orbitar(jugador);
   if (meta2.cogido) meta2.Orbitar(jugador);
   switch(niveles) {
+  case 0:
+    textSize(50);
+    text("Parecen unas ruinas abandonadas...", 200, 300); 
+    nivellZero();
+    break;
   case 1:
+  textSize(40);
+    text("¿Un laberinto?", 325, 100);
     primerNivell();
     break;
   case 2:
+  textSize(50);
+    text("¡Enemigos!", 450, 100); 
     segonNivell();
     
     
     break;
   case 3:
+    textSize(30);
+    text("¿Este poder...? ", 400, 500);
+    textSize(20);
+    text("(Pulsa espacio para repeler enemigos)", 350, 550);
     tercerNivell();
     break;
   };
   if (nextLevel) {
     nextLevel = false;
     niveles++;
-    if (niveles > 3) niveles = 1;
+    if (niveles > 3) niveles = 0;
   }
 }
