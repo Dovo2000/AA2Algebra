@@ -8,6 +8,7 @@ class ParticulaMuerte {
   float fuerzaY;
   int tam;
   float tiempo = 0.04;
+  int bounceCount =0;
 
   ParticulaMuerte(float _m, PVector _pos, PVector _vel, int _t) {
     masa = _m;
@@ -19,7 +20,7 @@ class ParticulaMuerte {
   }
   void Mover() {
 
-    
+
     // 1- Calcular la aceleracion
     acelX = fuerzaX/masa;
     acelY = fuerzaY/masa;
@@ -31,7 +32,11 @@ class ParticulaMuerte {
     this.pos.y = pos.y + vel.y*tiempo;
     vel.limit(50);
     if (pos.y + tam > height) {
+      bounceCount++;
       vel.y = vel.y * -0.95;
+    }
+    if (bounceCount >= 4) {
+      tam =0;
     }
   }
 

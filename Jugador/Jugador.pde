@@ -37,24 +37,20 @@ class Player {
   }
   void ChocarParedes() {
     if ((pos.x) + tam/2 >= width) { 
-      rozando = true;
       pos.x = width - tam/2;
       vel.x = 0;
     }
     if ((pos.x) - tam/2 <= 0) {  
-      rozando = true;
       pos.x = tam/2;
       vel.x = 0;
-    } else rozando = false;
+    } 
     if ((pos.y) + tam/2 >= height) {
-      rozando = true;
       pos.y = height - tam/2;
       vel.y = 0;
-    } else rozando = false;
+    } else 
     if ((pos.y) - tam/2 <= 0) { 
-      rozando = true;
       pos.y = tam/2;
       vel.y = 0;
-    } else rozando = false;
+    }
   }
 } 

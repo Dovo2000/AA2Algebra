@@ -71,7 +71,7 @@ void setup() {
   muerte= new ParticulaMuerte[50];
 
   for (int i = 0; i<50; i++) {
-    muerte[i] = new ParticulaMuerte(0.9, new PVector(jugador.pos.x, jugador.pos.y), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
+    muerte[i] = new ParticulaMuerte(0.9, new PVector(width/2, height/2), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
   }
   niveles = 0;
   nextLevel = false;
