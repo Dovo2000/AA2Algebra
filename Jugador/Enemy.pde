@@ -20,7 +20,7 @@ class Enemy {
   }
 
   void DibujarEnemy() {
-    fill(0, 150, 150, 80);
+    fill(255, 0, 0);
     trasladar(pos.x, pos.y);
     ellipse(0, 0, tam, tam);
     resetMatrix();

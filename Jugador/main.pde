@@ -87,6 +87,7 @@ void draw() {
   if (meta2.cogido) meta2.Orbitar(jugador);
   switch(niveles) {
   case 0:
+  fill(255);
     textSize(50);
     text("Parecen unas ruinas abandonadas...", 200, 300); 
     textSize(20);
@@ -94,6 +95,7 @@ void draw() {
     nivellZero();
     break;
   case 1:
+  fill(255);
     textSize(40);
     text("¿Un laberinto?", 325, 100);
      textSize(20);
@@ -101,6 +103,7 @@ void draw() {
     primerNivell();
     break;
   case 2:
+  fill(255);
     textSize(50);
     text("¡Enemigos!", 450, 100); 
     segonNivell();
@@ -109,6 +112,7 @@ void draw() {
     
     break;
   case 3:
+  fill(255);
     textSize(30);
     text("¿Este poder...? ", 400, 500);
     textSize(20);

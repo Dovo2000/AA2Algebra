@@ -2,7 +2,8 @@ float currentTime;
 
 void tercerNivell() {
   jugador.DibujarPlayer();
-);
+  meta3.ChocarConPlayer(jugador);
+  meta3.DibujarMeta();
   if (key == 'm' || key == 'M') {
     for (int i =0; i<50; i++) {
       enemigos[i].Expulsar();

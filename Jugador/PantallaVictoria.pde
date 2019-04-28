@@ -1,5 +1,6 @@
 void pantallaVictoria() {
   background(0);
+  fill(255);
   textSize(50);
   text("ENHORABUENA", 200, 300); 
   textSize(20);
