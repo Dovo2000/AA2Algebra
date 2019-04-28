@@ -124,7 +124,7 @@ void draw() {
     pantallaVictoria();
     break;
   case -1:
-    //pantallaMuerte();
+    pantallaMuerte();
     break;
   };
   if (nextLevel) {
@@ -132,12 +132,7 @@ void draw() {
     niveles++;
     if (niveles > 3) Win = true;
   }
-  if ((time <= 0) ) {
-    for (int j = 0; j<50; j++) {
-      muerte[j].Update();
-      muerte[j].Mover();
-      muerte[j].ChocarParedes();
-      
-    }
+  if ((60000-millis())/1000 <= 0 && niveles != 4) {
+    niveles = -1;
   }
 }
