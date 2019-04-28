@@ -60,7 +60,11 @@ class Obstacle {
 
     if (dist < jug.tam/2) {
       //Colision
-      fill(random(255), random(255), random(255));
+      jug.pos.x = 0;
+      jug.pos.y = 0;
+      jug.vel.x = 0;
+      jug.vel.y = 0;
+      //fill(random(255), random(255), random(255));
     }
     resetMatrix();
   }
