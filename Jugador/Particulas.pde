@@ -11,9 +11,9 @@ class Particula {
   int tam;
   float posXo;
   float posYo;
- 
+
   // Constructor
-  Particula(float _m, PVector _pos, PVector _vel,int _t) {
+  Particula(float _m, PVector _pos, PVector _vel, int _t) {
     masa = _m;
     pos = _pos;
     vel = _vel;
@@ -38,14 +38,13 @@ class Particula {
     //this.pos.x = pos.x + vel.x*tiempo;
     //this.pos.y = pos.y + vel.y*tiempo;
     //vel.limit(50);
-    trasladar(30,0);
-  
+    trasladar(30, 0);
   }
   void Update() {
-    
-    fill(233,0,0,80);
-    ellipse(pos.x, pos.y,tam,tam);
-    fill(255);     
+
+    fill(233, 0, 0, 80);
+    ellipse(pos.x, pos.y, tam, tam);
+    fill(255);
   }
   void Eliminar() {
     pos.x = 2000;

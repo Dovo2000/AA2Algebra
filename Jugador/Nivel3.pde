@@ -1,2 +1,3 @@
-void tercerNivell(){
+void tercerNivell() {
+  jugador.DibujarPlayer();
 }

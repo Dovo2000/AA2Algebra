@@ -1,5 +1,5 @@
 class Player {
-  
+
   PVector pos;
   PVector vel;
   boolean rozando = false;
@@ -25,13 +25,13 @@ class Player {
         vel.x -= 0.2;
       }
     }
-    vel.limit(5);
+    vel.limit(2.5);
     pos.add(vel);
     ChocarParedes();
   }
   void DibujarPlayer() {
-    fill(0,150,150, 80);
-    trasladar(pos.x,pos.y);
+    fill(0, 150, 150, 80);
+    trasladar(pos.x, pos.y);
     ellipse(0, 0, tam, tam);
     resetMatrix();
   }
@@ -39,22 +39,22 @@ class Player {
     if ((pos.x) + tam/2 >= width) { 
       rozando = true;
       pos.x = width - tam/2;
+      vel.x = 0;
     }
     if ((pos.x) - tam/2 <= 0) {  
       rozando = true;
       pos.x = tam/2;
-    }
-    
-    else rozando = false;
+      vel.x = 0;
+    } else rozando = false;
     if ((pos.y) + tam/2 >= height) {
       rozando = true;
       pos.y = height - tam/2;
-    }
-    else rozando = false;
+      vel.y = 0;
+    } else rozando = false;
     if ((pos.y) - tam/2 <= 0) { 
       rozando = true;
       pos.y = tam/2;
-    }
-    else rozando = false;
+      vel.y = 0;
+    } else rozando = false;
   }
 } 
