@@ -9,14 +9,14 @@ class Enemy {
     pos = _pos;
     vel = new PVector();
     acc = new PVector(); 
-    alpha = random(0.2);
+    alpha = random(0.1);
   }
   void Update(Player jug) {
     vel.x = (jug.pos.x - pos.x)*alpha;
     vel.y = (jug.pos.y - pos.y)*alpha;
-    vel.limit(2);
     pos.add(vel);
-    vel.add(acc);
+    vel.limit(5);
+    //vel.add(acc);
   }
 
   void DibujarEnemy() {
@@ -51,25 +51,17 @@ class Enemy {
       acc.y = 0;
     }
   }
-  void Expulsar() {
-
-    vel.sub(vel);
-  }
-  void ChocarConPlayer(Player jug) {
-    PVector posJug = PVector.sub(jug.pos, pos);
-    PVector puntoCercano = new  PVector(0, 0);
-    float dist = dist(puntoCercano.x, puntoCercano.y, posJug.x, posJug.y);
-
-    if (dist < jug.tam/2 + tam/2) {
-      //Colision
-      //Al tocar la pared reinicia la posición del jugador a la entrada
-      jug.pos.x = jug.tam;
-      jug.pos.y = jug.tam;
-      jug.vel.x = 0;
-      jug.vel.y = 0;
-    }
+  void Expulsar(Player jug) {
+    PVector direccion = PVector.sub(jug.pos, pos);
+    float distanciaAlCuadrado = direccion.magSq();
+    float G = -10000;
+    float fuerza = G / distanciaAlCuadrado;
+    direccion.setMag(fuerza);
+    acc = direccion;
+    vel.add(acc);
   }
 }
+
 // NORMAL ENEMY 
 
 class NormalEnemy {
@@ -95,17 +87,21 @@ class NormalEnemy {
   }
 
   void move2() {
-    if (pos.x < 450 || pos.x > 750) {
-      vel.x *= -1;
+    if (pos.x > 500 || pos.x < 100) {
+      vel.y *= -1;
     }
+
+
+
+
 
     vel.limit(2.5);
     pos.add(vel);
     ChocarParedes();
   }
   void move3() {
-    if (pos.x < 700 || pos.x > 1101) {
-      vel.x *= -1;
+    if (pos.y > 500 || pos.y < 100) {
+      vel.y *= -1;
     }
 
     vel.limit(2.5);
@@ -113,7 +109,7 @@ class NormalEnemy {
     ChocarParedes();
   }
   void DibujarNormalEnemy() {
-    fill(200, 0, 0, 200);
+    fill(250, 150, 150, 80);
     trasladar(pos.x, pos.y);
     ellipse(0, 0, tam, tam);
     resetMatrix();
