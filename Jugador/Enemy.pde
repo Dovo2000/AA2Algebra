@@ -1,13 +1,22 @@
 class Enemy {
-
   PVector pos;
   PVector vel;
-  boolean rozando = false;
-  int tam = 100;
-boolean arriba = false;
-  Enemy(PVector _pos, PVector _vel) {
+  PVector acc;
+  int tam = 30;
+  float alpha;
+  
+  Enemy(PVector _pos) {
     pos = _pos;
-    vel = _vel;
+    vel = new PVector();
+    acc = new PVector(); 
+    alpha = random(0.1);
+  }
+  void Update(Player jug){
+    vel.x = (jug.pos.x - pos.x)*alpha;
+    vel.y = (jug.pos.y - pos.y)*alpha;
+    pos.add(vel);
+    vel.limit(5);
+    //vel.add(acc);
   }
   
   void DibujarEnemy() {
@@ -18,25 +27,38 @@ boolean arriba = false;
   }
   void ChocarParedes() {
     if ((pos.x) + tam/2 >= width) { 
-      rozando = true;
+
       pos.x = width - tam/2;
       vel.x = 0;
+      acc.x = 0;
     }
     if ((pos.x) - tam/2 <= 0) {  
-      rozando = true;
+      
       pos.x = tam/2;
       vel.x = 0;
-    } else rozando = false;
+      acc.x = 0;
+    } 
     if ((pos.y) + tam/2 >= height) {
-      rozando = true;
+      
       pos.y = height - tam/2;
       vel.y = 0;
-    } else rozando = false;
+      acc.y = 0;
+    } else 
     if ((pos.y) - tam/2 <= 0) { 
-      rozando = true;
+    
       pos.y = tam/2;
       vel.y = 0;
-    } else rozando = false;
+      acc.y = 0;
+    } 
+  }
+  void Expulsar(Player jug){
+    PVector direccion = PVector.sub(jug.pos, pos);
+    float distanciaAlCuadrado = direccion.magSq();
+    float G = -10000;
+    float fuerza = G / distanciaAlCuadrado;
+    direccion.setMag(fuerza);
+    acc = direccion;
+    vel.add(acc);
   }
 }
 

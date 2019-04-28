@@ -1,9 +1,10 @@
-//<>// //<>//
+//<>// //<>// //<>//
 int niveles;
 boolean nextLevel;
 Player jugador;
 Obstacle obstaculo, obstaculo1, obstaculo2, obstaculo3, obstaculo4, obstaculo5, obstaculo6, obstaculo7, obstaculo8, obstaculo9, obstaculo10;
 Particula[] rozando;
+Enemy enemigo1;
 Meta meta1, meta2;
 NormalEnemy normalEnemie,normalEnemie2;
 //Funciones con las matrices de transformacion homogenea
@@ -30,6 +31,7 @@ void setup() {
   // Enemy
   normalEnemie = new NormalEnemy(new PVector(100, 300), new PVector(0,2));
   normalEnemie2 = new NormalEnemy(new PVector(500, 100), new PVector(0,2));
+  enemigo1 = new Enemy(new PVector(random(width),random(height)));
   // primer nivell
   obstaculo = new Obstacle(new PVector(width/2 - 100, height/2 +300), 100, 900, 0);
   obstaculo1 = new Obstacle(new PVector(10, 600), 100, 900, 0);
@@ -50,7 +52,7 @@ void setup() {
   for (int i = 0; i<10; i++) {
     rozando[i] = new Particula(0.9, new PVector(0, 0), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
   }
-  niveles = 2;
+  niveles = 3;
   nextLevel = false;
 }
 void draw() {
@@ -78,35 +80,3 @@ void draw() {
     if (niveles > 3) niveles = 1;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//trasladar(width/2, height/2);
-//obstaculo.DibujarObstacle();
-//obstaculo.ChocarConPlayer(jugador);
-//jugador.Mover();
-//jugador.DibujarPlayer();
-//resetMatrix(); 
-
-////   for (int j = 0; j<10; j++) {
-////     trasladar(jugador.pos.x, jugador.pos.y);
-////     rozando[j].Mover();
-////     rozando[j].Update();
-////     resetMatrix();
-////   }
-//// }
