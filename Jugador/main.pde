@@ -1,9 +1,12 @@
 //<>// //<>// //<>//
 int niveles;
 boolean nextLevel;
+
+
+
 Player jugador;
 Obstacle obstaculo, obstaculo1, obstaculo2, obstaculo3, obstaculo4, obstaculo5, obstaculo6, obstaculo7, obstaculo8, obstaculo9, obstaculo10;
-Particula[] rozando;
+ParticulaMuerte[] muerte;
 Meta meta1, meta2, meta0;
 NormalEnemy normalEnemie,normalEnemie2, normalEnemie3;
 //Funciones con las matrices de transformacion homogenea
@@ -49,15 +52,16 @@ void setup() {
   obstaculo8 = new Obstacle(new PVector(300, 200), 100, 600, 0);
   meta2 = new Meta(new PVector(1075, 200), 20, 20, 0); 
   // segon nivell
-  rozando = new Particula[10];
-
-  for (int i = 0; i<10; i++) {
-    rozando[i] = new Particula(0.9, new PVector(0, 0), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
+  muerte= new ParticulaMuerte[50];
+  
+  for (int i = 0; i<50; i++) {
+    muerte[i] = new ParticulaMuerte(0.9, new PVector(jugador.pos.x, jugador.pos.y), new PVector(random(-70.0, 70.0), random(-70.0, 70.0)), 20);
   }
   niveles = 0;
   nextLevel = false;
 }
 void draw() {
+  
   nextLevel = false;
   background(51,51,255);
   jugador.Mover();
@@ -67,18 +71,23 @@ void draw() {
   case 0:
     textSize(50);
     text("Parecen unas ruinas abandonadas...", 200, 300); 
+    textSize(20);
+    text((60000-millis())/1000, 900, 20); 
     nivellZero();
     break;
   case 1:
-  textSize(40);
+    textSize(40);
     text("¿Un laberinto?", 325, 100);
+     textSize(20);
+    text((60000-millis())/1000, 900, 20);
     primerNivell();
     break;
   case 2:
   textSize(50);
     text("¡Enemigos!", 450, 100); 
     segonNivell();
-    
+     textSize(20);
+    text((60000-millis())/1000, 900, 20); 
     
     break;
   case 3:
@@ -86,6 +95,8 @@ void draw() {
     text("¿Este poder...? ", 400, 500);
     textSize(20);
     text("(Pulsa espacio para repeler enemigos)", 350, 550);
+     textSize(20);
+    text((60000-millis())/1000, 900, 20); 
     tercerNivell();
     break;
   };
@@ -94,9 +105,16 @@ void draw() {
     niveles++;
     if (niveles > 3) niveles = 0;
   }
+  if((3000-millis() <= 0) ){
+    for (int j = 0; j<50; j++) {
+    muerte[j].Update();
+    muerte[j].Mover();
+    muerte[j].ChocarParedes();
+  }
+
 }
 
-
+}
 
 
 
