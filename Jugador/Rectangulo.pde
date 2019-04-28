@@ -23,7 +23,7 @@ class Obstacle {
 
 
 
-    fill(255, 0, 0, 80);
+    fill(200, 0, 0, 120);
     rect(0, 0, ancho, alto);
 
     resetMatrix();

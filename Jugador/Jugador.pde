@@ -30,7 +30,7 @@ class Player {
     ChocarParedes();
   }
   void DibujarPlayer() {
-    fill(0, 150, 150, 80);
+    fill(0, 255, 0, 200);
     trasladar(pos.x, pos.y);
     ellipse(0, 0, tam, tam);
     resetMatrix();

@@ -3,12 +3,17 @@ class Meta {
   int ancho;
   int alto;
   float angulo;
+  boolean cogido = false;
+  float trasladoX;
+  float trasladoY;
 
   Meta(PVector _pos, int _ancho, int _alto, float _angulo) {
     pos = _pos;
     ancho = _ancho;
     alto = _alto;
     angulo = _angulo;
+    trasladoX = random(12, 17);
+    trasladoY = random(12, 17);
   }
   void DibujarMeta() {
     angulo+= PI/180;
@@ -17,9 +22,10 @@ class Meta {
 
     rotar(angulo);
 
-    fill(0, 255, 0, 80);
+    fill(255, 255, 0, 80);
     rect(0, 0, ancho, alto);
-    fill(155, 155, 0);
+    escalar(0.5);
+    fill(255, 255, 0);
     ellipse(0, 0, ancho, alto);
 
     resetMatrix();
@@ -58,9 +64,23 @@ class Meta {
       jug.pos.y = jug.tam/2;
       jug.vel.x = 0;
       jug.vel.y = 0;
+      cogido = true;
       //Y pasa al siguiente nivel
       nextLevel = true;
     }
+    resetMatrix();
+  }
+  void Orbitar(Player jug) {
+    angulo+= PI/180;
+    if (angulo>=TWO_PI) angulo = 0;
+    trasladar(jug.pos.x, jug.pos.y);
+    rotar(angulo);
+    trasladar(trasladoX, trasladoY);
+
+
+    fill(255, 255, 0);
+    escalar(0.5);
+    ellipse(0, 0, ancho, alto);
     resetMatrix();
   }
 }
